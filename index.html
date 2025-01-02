@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <style>
+        /* Modern CSS Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            line-height: 1.6;
+            color: #2c2c2c;
+            background: #fafafa;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(252, 252, 252, 0.95);
+            padding: 1.5rem;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-links {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #2c2c2c;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: 0;
+            left: 50%;
+            background: #2c2c2c;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+            left: 0;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, #f6f6f6 0%, #ffffff 100%);
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0,0,0,0.03) 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.5;
+            animation: grain 8s steps(10) infinite;
+        }
+
+        @keyframes grain {
+            0%, 100% { transform: translate(0, 0); }
+            10% { transform: translate(-5%, -5%); }
+            20% { transform: translate(5%, 5%); }
+            30% { transform: translate(-5%, 5%); }
+            40% { transform: translate(5%, -5%); }
+            50% { transform: translate(-5%, -5%); }
+            60% { transform: translate(5%, 5%); }
+            70% { transform: translate(-5%, 5%); }
+            80% { transform: translate(5%, -5%); }
+            90% { transform: translate(-5%, -5%); }
+        }
+
+        .hero-content {
+            max-width: 800px;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 1rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            color: #666;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        /* Categories */
+        .categories {
+            padding: 8rem 2rem;
+            background: #ffffff;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .category-card {
+            background: #ffffff;
+            padding: 3rem 2rem;
+            border-radius: 2px;
+            text-align: center;
+            box-shadow: 0 2px 25px rgba(0, 0, 0, 0.03);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 0%, rgba(255,255,255,0.1) 100%);
+            transition: transform 0.6s ease;
+            transform: translateY(100%);
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .category-card:hover::before {
+            transform: translateY(0);
+        }
+
+        .category-card h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .category-card p {
+            color: #666;
+            font-style: italic;
+        }
+
+        /* Gallery Grid */
+        .gallery-section {
+            padding: 8rem 2rem;
+            background: #fafafa;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 3/4;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-item:hover::after {
+            opacity: 1;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            .nav-links a {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#nature">Nature</a>
+            <a href="#urban">Urban</a>
+            <a href="#portraits">Portraits</a>
+            <a href="#events">Events</a>
+            <a href="#travel">Travel</a>
+            <a href="#taiwan">Taiwan</a>
+            <a href="#bars">Bars</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Through My Lens</h1>
+            <p>Capturing moments, creating stories</p>
+        </div>
+    </section>
+
+    <!-- Gallery Categories -->
+    <section class="categories">
+        <div class="category-grid">
+            <div class="category-card">
+                <h2>Nature</h2>
+                <p>The raw beauty of our world</p>
+            </div>
+            <div class="category-card">
+                <h2>Urban</h2>
+                <p>Stories from the streets</p>
+            </div>
+            <div class="category-card">
+                <h2>Portraits</h2>
+                <p>Soul through the lens</p>
+            </div>
+            <div class="category-card">
+                <h2>Events</h2>
+                <p>Moments in time</p>
+            </div>
+            <div class="category-card">
+                <h2>Travel</h2>
+                <p>Adventures across borders</p>
+            </div>
+            <div class="category-card">
+                <h2>Taiwan</h2>
+                <p>Island of endless wonder</p>
+            </div>
+            <div class="category-card">
+                <h2>Bars</h2>
+                <p>Nightlife in motion</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sample Gallery Section -->
+    <section class="gallery-section">
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="/api/placeholder/400/500" alt="Nature photograph">
+            </div>
+            <div class="gallery-item">
+                <img src="/api/placeholder/400/500" alt="Urban photograph">
+            </div>
+            <div class="gallery-item">
+                <img src="/api/placeholder/400/500" alt="Portrait photograph">
+            </div>
+            <div class="gallery-item">
+                <img src="/api/placeholder/400/500" alt="Event photograph">
+            </div>
+            <div class="gallery-item">
+                <img src="/api/placeholder/400/500" alt="Travel photograph">
+            </div>
+            <div class="gallery-item">
+                <img src="/api/placeholder/400/500" alt="Taiwan photograph">
+            </div>
+            <div class="gallery-item">
+                <img src="/api/placeholder/400/500" alt="Bar photograph">
+            </div>
+            <div class="gallery-item">
+                <img src="/api/placeholder/400/500" alt="Landscape photograph">
+            </div>
+            <div class="gallery-item">
+                <img src="/api/placeholder/400/500" alt="Architecture photograph">
+            </div>
+        </div>
+    </section>
+</body>
+</html>
